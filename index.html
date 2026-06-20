@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+
+    <!-- ================= FIRST SCREEN ================= -->
+    <div class="first-screen" id="drawArea">
+        <img src="assets/images/gray-element-1.svg" class="gray-element-1">
+        <img src="assets/images/rings.svg" class="rings ">
+        <div class="bg-nap">
+            <p id="nap-word">сон</p>
+        </div>
+    </div>
+
+    <!-- ================= SECOND SCREEN ================= -->
+    <div class="second-screen" id="canvas-parent">
+        <img class="illustration-new-bg" src="assets/images/BG.svg">
+        <img class="illustration-new-figure" src="assets/images/Figure.svg">
+        <img class="illustration-new-mask" src="assets/images/mask-bg.svg">
+    </div>
+
+    <!-- ================= THIRD SCREEN ================= -->
+    <div class="third-screen">
+
+        <img class="illustration-new-mask" src="assets/images/mask-2.svg">
+
+        <!-- OVERLAY -->
+        <div class="info-overlay">
+            <div class="info-text"></div>
+            <img class="close-button" src="assets/images/close-button.svg">
+        </div>
+        <div class="bg-container">
+            <div class="slide-bg" style="background-image: url('assets/images/bg-screen-3.svg');"></div>
+            <div class="slide-bg" style="background-image: url('assets/images/bg-slide-1.svg');"></div>
+            <div class="slide-bg" style="background-image: url('assets/images/bg-slide-2.svg');"></div>
+            <div class="slide-bg" style="background-image: url('assets/images/bg-slide-3.svg');"></div>
+            <div class="slide-bg" style="background-image: url('assets/images/bg-slide-4.svg');"></div>
+</div>
+        <div class="substrate">
+
+            <!-- Слайд 1 -->
+            <div class="slide-content" data-slide="0">
+                <div class="catastrophe">
+                    <p>Катастрофы из-за депривации сна</p>
+                </div>
+                <img class="catastrophe-img" src="assets/images/catastrophe-img.svg">
+            </div>
+
+            <!-- Слайд 2 -->
+            <div class="slide-content" data-slide="1" style="display: none;">
+                <div class="calendar-container">
+                    <div class="top-calendar-text">
+                        <div class="date">1986</div>
+                        <div class="month">ЯНВАРЬ</div>
+                    </div>
+                    <div class="mid-calendar-text">
+                        <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>
+                        <p>11</p><p>12</p><p>13</p><p>14</p><p>15</p><p>16</p><p>17</p><p>18</p><p>19</p><p>20</p>
+                        <p>21</p><p>22</p><p>23</p><p>24</p><p>25</p><p>26</p><p>27</p><p>28</p><p>29</p><p>30</p><p>31</p>
+                    </div>
+                    <div class="bottom-calendar-text">
+                        <div class="left-bottom-text">(01)</div>
+                        <div class="mid-bottom-text">Катастрофа шаттла «Челленджер»</div>
+                        <div class="right-bottom-text">28</div>
+                    </div>
+                </div>
+
+                <img class="inf-button" data-id="slide1" src="assets/images/gray-element.svg">
+
+                <div class="hidden-text" id="slide1">
+                    <p>Решение о запуске принималось в ночь во время телеконференции<br>
+между NASA и инженерами компании. Спор длился более 12 часов. Инженеры,<br> знавшие о рисках запуска при рекордно низкой температуре (-2), провели<br>
+практически бессонную ночь, пытаясь отменить старт. В состоянии<br>
+ крайней усталости и под давлением графика, они<br>
+отозвали свои возражения.</p>
+                </div>
+            </div>
+
+            <!-- Слайд 3 -->
+            <div class="slide-content" data-slide="2" style="display: none;">
+                <div class="calendar-container">
+                    <div class="top-calendar-text">
+                        <div class="date">1989</div>
+                        <div class="month" style="left: 50.6%">МАРТ</div>
+                    </div>
+                    <div class="mid-calendar-text">
+                        <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>
+                        <p>11</p><p>12</p><p>13</p><p>14</p><p>15</p><p>16</p><p>17</p><p>18</p><p>19</p><p>20</p>
+                        <p>21</p><p>22</p><p>23</p><p>24</p><p>25</p><p>26</p><p>27</p><p>28</p><p>29</p><p>30</p><p>31</p>
+                    </div>
+                    <div class="bottom-calendar-text">
+                        <div class="left-bottom-text">(02)</div>
+                        <div class="mid-bottom-text">Авария танкера «Эксон Вальдез»</div>
+                        <div class="right-bottom-text" style="left: 72.38%">24</div>
+                    </div>
+                </div>
+
+                <img class="inf-button" data-id="slide2" src="assets/images/gray-element.svg">
+
+                <div class="hidden-text" id="slide2">
+                    <p>Третий помощник капитана, который в одиночку<br>
+                        управлял судном в момент аварии, бодрствовал более 18 часов подряд. Он<br>
+                        пропустил несколько сигналов об  отклонении от  курса,   а   его   реакция<br>
+                        на опасность была запоздалой.</p>
+                </div>
+            </div>
+
+            <!-- Слайд 4 -->
+            <div class="slide-content" data-slide="3" style="display: none;">
+                <div class="calendar-container">
+                    <div class="top-calendar-text">
+                        <div class="date">1986</div>
+                        <div class="month">АПРЕЛЬ</div>
+                    </div>
+                    <div class="mid-calendar-text">
+                        <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>
+                        <p>11</p><p>12</p><p>13</p><p>14</p><p>15</p><p>16</p><p>17</p><p>18</p><p>19</p><p>20</p>
+                        <p>21</p><p>22</p><p>23</p><p>24</p><p>25</p><p>26</p><p>27</p><p>28</p><p>29</p><p>30</p><p>31</p>
+                    </div>
+                    <div class="bottom-calendar-text">
+                        <div class="left-bottom-text">(03)</div>
+                        <div class="mid-bottom-text">Чернобыльская АЭС</div>
+                        <div class="right-bottom-text" style="left: 79.60%">26</div>
+                    </div>
+                </div>
+
+                <img class="inf-button" data-id="slide3" src="assets/images/gray-element.svg">
+
+                <div class="hidden-text" id="slide3">
+                    <p>Авария произошла в 1:23 ночи, во время эксперимента,<br>
+                        которым управляла ночная смена. Персонал работал в пик сонливости,<br>
+                        что закономерно снижало бдительность, скорость реакции и способность<br>
+                        к комплексному анализу аварийной ситуации. Хроническое<br>
+                        недосыпание, характерное для работников сменного<br>
+                        труда, усугубило ситуацию.</p>
+                </div>
+            </div>
+
+            <!-- Слайд 5 -->
+            <div class="slide-content" data-slide="4" style="display: none;">
+                <div class="calendar-container">
+                    <div class="top-calendar-text">
+                        <div class="date">1979</div>
+                        <div class="month" style="left: 50.6%">МАРТ</div>
+                    </div>
+                    <div class="mid-calendar-text">
+                        <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>
+                        <p>11</p><p>12</p><p>13</p><p>14</p><p>15</p><p>16</p><p>17</p><p>18</p><p>19</p><p>20</p>
+                        <p>21</p><p>22</p><p>23</p><p>24</p><p>25</p><p>26</p><p>27</p><p>28</p><p>29</p><p>30</p><p>31</p>
+                    </div>
+                    <div class="bottom-calendar-text">
+                        <div class="left-bottom-text">(04)</div>
+                        <div class="mid-bottom-text">Три-Майл-Айленд</div>
+                        <div class="right-bottom-text">28</div>
+                    </div>
+                </div>
+
+                <img class="inf-button" data-id="slide4" src="assets/images/gray-element.svg">
+
+                <div class="hidden-text" id="slide4">
+                    <p>Авария началась около 4:00 утра — в это время мы сильнее всего<br>
+                        хотим спать, реакции замедлены,  внимание  рассеяно, а физические силы <br>
+                        на минимуме. Операторы в ночную смену неправильно интерпретировали<br>
+                         показания сотен датчиков на пульте, не смогли распознать открытый<br>
+                        аварийный клапан и отключили аварийную систему<br>
+                        охлаждения, усугубив расплавление.</p>
+                </div>
+            </div>
+
+            <!-- НАВИГАЦИЯ -->
+            <div class="switch">
+                <img class="arrow-left" src="assets/images/left-arrow.svg">
+                <p class="page-number">(00)</p>
+                <img class="arrow-right" src="assets/images/right-arrow.svg">
+            </div>
+
+        </div>
+    </div>
+    <!-- ================= THOURTH SCREEN ================= -->
+    <div class="fourth-screen">
+        <div id="nap-word-box" class="bg-nap bed-word-center">
+            <p id="nap-word-bed">не вреди — поспи</p>
+        </div>
+        <div id="model-container"></div>
+        <img class="girl-left" src="assets/images/left-girl.svg">
+        <img class="girl-right" src="assets/images/right-girl.svg">
+        <img class="gray-element-2" src="assets/images/gray-element-2.svg">
+    </div>
+    <script src="bed-3d.js"></script>
+    <script src='mask.js'></script>
+    <script src='snake.js'></script>
+    <script src="script.js"></script>
+    
+</body>
+</html>
