@@ -1,4 +1,5 @@
 let controls;
+
 function changeZoom() {
     controls.enableZoom = true;
     controls.enableDamping = true;
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); 
     scene.add(ambientLight);
     
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5); 
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0); 
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
     
@@ -41,18 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const loader = new THREE.GLTFLoader();
     loader.load('assets/model-of-bed2.glb',
         (gltf) => {
-            console.log('Модель загружена!');
             gltf.scene.rotation.y = Math.PI;
 
             gltf.scene.traverse((child) => {
-                if (child.isMesh && child.material) {
-                    
-                    // --- ДОБАВЛЕН ЦВЕТ ---
-                    child.material.color = new THREE.Color('#D7E8F6');
-                    
-                    child.material.roughness = 0.15; 
-                    child.material.metalness = 0.1; 
-                    child.material.needsUpdate = true;
+                if (child.isMesh) {
+                    child.material = new THREE.MeshStandardMaterial({
+                        color: new THREE.Color('#D7E8F6'),
+                        roughness: 0.15,
+                        metalness: 0.1
+                    });
                 }
             });
 
@@ -82,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         controls.update();
         renderer.render(scene, camera);
     }
+    
     animate();
     
     window.addEventListener('resize', () => {
