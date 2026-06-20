@@ -17,20 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setClearColor(0xC9C9C9);
 
-    // 1. НАСТРОЙКИ РЕНДЕРА: Включаем правильную цветопередачу для GLTF
     renderer.outputEncoding = THREE.sRGBEncoding;
-    // Включаем алгоритм тонемаппинга для красивых и реалистичных бликов
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.0;
 
     container.appendChild(renderer.domElement);
     
-    // 2. ОСВЕЩЕНИЕ: AmbientLight на единичке слишком яркий, он делает модель плоской.
-    // Снижаем его, чтобы направленный свет мог создавать четкие блики.
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); 
     scene.add(ambientLight);
     
-    // Делаем направленный свет чуть ярче для контраста
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5); 
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
@@ -49,17 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Модель загружена!');
             gltf.scene.rotation.y = Math.PI;
 
-            // 3. ПРИНУДИТЕЛЬНЫЙ ГЛЯНЕЦ: Проходимся по всем материалам 
-            // и жестко задаем им гладкость (roughness)
             gltf.scene.traverse((child) => {
                 if (child.isMesh && child.material) {
-                    // roughness: 0 - абсолютно гладкий (как стекло/вода), 1 - матовый (как бумага)
+                    
+                    // --- ДОБАВЛЕН ЦВЕТ ---
+                    child.material.color = new THREE.Color('#D7E8F6');
+                    
                     child.material.roughness = 0.15; 
-                    
-                    // metalness: 0 - пластик/керамика, 1 - металл
                     child.material.metalness = 0.1; 
-                    
-                    // Обновляем материал
                     child.material.needsUpdate = true;
                 }
             });
